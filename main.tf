@@ -38,7 +38,7 @@ resource "consul_acl_auth_method" "tasks" {
   config_json = jsonencode({
     JWKSURL          = var.nomad_jwks_url
     JWTSupportedAlgs = ["RS256"]
-    BoundAudiences   = var.audience
+    BoundAudiences   = [var.audience]
     ClaimMappings = {
       nomad_namespace = "nomad_namespace"
       nomad_job_id    = "nomad_job_id"
