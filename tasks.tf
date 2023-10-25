@@ -36,6 +36,11 @@ resource "consul_acl_auth_method" "tasks" {
       nomad_service   = "nomad_service"
     }
   })
+
+  # Note: you should not set a max_token_ttl value for this auth method since
+  # Consul tokens cannot be renewed and the tokens used by Nomad are expected
+  # to live for as long as the allocation runs. Nomad automatically invalidates
+  # then when the allocation stops.
 }
 
 # consul_acl_binding_rule.tasks binds consul_acl_auth_method.tasks to a role
