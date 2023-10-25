@@ -26,8 +26,8 @@ variable "tasks_policy_name" {
 
 variable "audience" {
   description = "The `aud` value set on Nomad workload identity JWTs."
-  type        = string
-  default     = "consul.io"
+  type        = list(string)
+  default     = ["consul.io"]
 }
 
 variable "nomad_namespaces" {
