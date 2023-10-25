@@ -4,6 +4,8 @@
 locals {
   create_default_policy = length(var.tasks_policy_ids) == 0
   tasks_policy_ids      = local.create_default_policy ? consul_acl_policy.tasks[*].id : var.tasks_policy_ids
+
+  tasks_role_prefix = "nomad"
 }
 
 # Configuration for Nomad services.
@@ -56,7 +58,7 @@ resource "consul_acl_auth_method" "tasks" {
 resource "consul_acl_role" "tasks" {
   for_each = toset(var.nomad_namespaces)
 
-  name        = "nomad-tasks-${each.key}"
+  name        = "${local.tasks_role_prefix}-${each.key}"
   description = "ACL role for Nomad tasks in the ${each.key} Nomad namespace"
   policies    = local.tasks_policy_ids
 }
@@ -82,5 +84,5 @@ resource "consul_acl_binding_rule" "tasks" {
   auth_method = consul_acl_auth_method.tasks.name
   description = "Binding rule for Nomad tasks"
   bind_type   = "role"
-  bind_name   = "nomad-$${value.nomad_namespace}"
+  bind_name   = "${local.tasks_role_prefix}-$${value.nomad_namespace}"
 }
