@@ -1,21 +1,25 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
-variable "services_auth_method_name" {
-  description = "The name of the auth method used by Nomad to register services."
+# Required variables.
+
+variable "nomad_jwks_url" {
+  description = "The URL used by Consul to access Nomad's JWKS information. It should be reachable by all Consul agents and resolve to multiple Nomad agents for high-availability, such as through a proxy or a DNS entry with multiple IP addresses."
   type        = string
-  default     = "nomad-workloads"
+}
+
+# Optional variables.
+
+variable "services_auth_method_name" {
+  description = "The name of the auth method used to register Nomad services."
+  type        = string
+  default     = "nomad-services"
 }
 
 variable "tasks_auth_method_name" {
-  description = "The name of the auth method used by Nomad tasks to access Consul data."
+  description = "The name of the auth method used to access Consul data by Nomad tasks."
   type        = string
   default     = "nomad-tasks"
-}
-
-variable "nomad_jwks_url" {
-  description = "The URL used by Consul to access Nomad's JWKS information."
-  type        = string
 }
 
 variable "tasks_default_policy_name" {
@@ -31,13 +35,13 @@ variable "tasks_policy_ids" {
 }
 
 variable "audience" {
-  description = "The `aud` value set on Nomad workload identity JWTs."
+  description = "The `aud` value set on Nomad workload identities for Consul. Must match the used in the Nomad, such as the agent configuration for `consul.task_identity.aud` and `consul.service_identity.aud` and the job values for `service.identity.aud` and `task.identity.aud`."
   type        = string
   default     = "consul.io"
 }
 
 variable "nomad_namespaces" {
-  description = "The list of Nomad namespaces to bind rules."
+  description = "A list of Nomad namespaces where jobs that need access to Consul are deployed. A Consul ACL role is created for each namespace."
   type        = list(string)
   default     = ["default"]
 }
