@@ -28,7 +28,7 @@ module "consul_setup" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_audience"></a> [audience](#input\_audience) | The `aud` value set on Nomad workload identity JWTs. | `string` | `"consul.io"` | no |
+| <a name="input_audience"></a> [audience](#input\_audience) | The `aud` value set on Nomad workload identity JWTs. | `list(string)` | <pre>[<br>  "consul.io"<br>]</pre> | no |
 | <a name="input_nomad_jwks_url"></a> [nomad\_jwks\_url](#input\_nomad\_jwks\_url) | The URL used by Consul to access Nomad's JWKS information. | `string` | n/a | yes |
 | <a name="input_nomad_namespaces"></a> [nomad\_namespaces](#input\_nomad\_namespaces) | The list of Nomad namespaces to bind rules. | `list(string)` | <pre>[<br>  "default"<br>]</pre> | no |
 | <a name="input_services_auth_method_name"></a> [services\_auth\_method\_name](#input\_services\_auth\_method\_name) | The name of the auth method used by Nomad to register services. | `string` | `"nomad-workloads"` | no |
