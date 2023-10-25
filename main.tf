@@ -1,6 +1,11 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
+locals {
+  create_default_policy = length(var.tasks_policy_ids) == 0
+  tasks_policy_ids      = local.create_default_policy ? consul_acl_policy.tasks[*].id : var.tasks_policy_ids
+}
+
 # Configuration for Nomad services.
 resource "consul_acl_auth_method" "services" {
   name         = var.services_auth_method_name
@@ -53,11 +58,13 @@ resource "consul_acl_role" "tasks" {
 
   name        = "nomad-tasks-${each.key}"
   description = "ACL role for Nomad tasks in the ${each.key} Nomad namespace"
-  policies    = [consul_acl_policy.tasks.id]
+  policies    = local.tasks_policy_ids
 }
 
 resource "consul_acl_policy" "tasks" {
-  name        = var.tasks_policy_name
+  count = local.create_default_policy ? 1 : 0
+
+  name        = var.tasks_default_policy_name
   description = "ACL policy used by Nomad tasks"
 
   rules = <<EOF

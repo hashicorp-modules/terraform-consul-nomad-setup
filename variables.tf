@@ -18,10 +18,16 @@ variable "nomad_jwks_url" {
   type        = string
 }
 
-variable "tasks_policy_name" {
-  description = "The name of the Consul ACL policy created for Nomad tasks to access Consul data."
+variable "tasks_default_policy_name" {
+  description = "The name of the default Consul ACL policy created for Nomad tasks when `tasks_policy_ids` is not defined."
   type        = string
   default     = "nomad-task"
+}
+
+variable "tasks_policy_ids" {
+  description = "A list of ACL policy IDs to apply to tokens generated for Nomad tasks."
+  type        = list(string)
+  default     = []
 }
 
 variable "audience" {
