@@ -5,7 +5,11 @@ Consul cluster to integrate it with [Nomad workload identity][nomad_wid] JWTs.
 
 ## Usage
 
-Using the default example values.
+### Default sample configuration
+
+This example uses the default sample configuration provided by the module. It
+allows allocations to register services and tasks to access any value in
+Consul's KV and service catalog.
 
 ```hcl
 module "consul_setup" {
@@ -15,7 +19,10 @@ module "consul_setup" {
 }
 ```
 
-Applying custom policies to tokens.
+### Custom policy
+
+This example uses a custom policy to limit task access to just the KV path
+`env/prod`.
 
 ```hcl
 resource "consul_acl_policy" "allow_kv_read_prod" {
