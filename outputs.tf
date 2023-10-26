@@ -33,6 +33,9 @@ consul {
   # CONSUL_HTTP_TOKEN environment variable instead of writing it in the
   # configuration file.
 
+  # Consul Enterprise only.
+  # namespace = "<namespace>"
+
   # Consul mTLS configuration.
   # ssl       = true
   # ca_file   = "/var/ssl/bundle/ca.bundle"
@@ -56,6 +59,9 @@ consul {
   # for automated clustering. It is recommended to set the token using the
   # CONSUL_HTTP_TOKEN environment variable instead of writing it in the
   # configuration file.
+
+  # Consul Enterprise only.
+  # namespace = "<namespace>"
 
   # Consul mTLS configuration.
   # ssl       = true

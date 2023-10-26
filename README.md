@@ -48,6 +48,41 @@ module "consul_setup" {
 }
 ```
 
+### Consul Namespace
+
+When using Consul Enterprise you can apply the configuration to a different
+namespace by configuring the `consul` provider.
+
+```hcl
+provider "consul" {
+  # ...
+  namespace = "prod"
+}
+```
+
+Create different [provider aliases][tf_provider_alias] to support multiple
+namespaces.
+
+```hcl
+provider "consul" {
+  # ...
+}
+
+provider "consul" {
+  alias = "prod"
+  # ...
+  namespace = "prod"
+}
+
+module "consul_setup" {
+  source = "github.com/hashicorp/terraform-consul-nomad-setup"
+  providers = {
+    consul = consul.prod
+  }
+  # ...
+}
+```
+
 ## Resources
 
 | Name | Type |
@@ -83,3 +118,4 @@ module "consul_setup" {
 | <a name="output_tasks_auth_method_id"></a> [tasks\_auth\_method\_id](#output\_tasks\_auth\_method\_id) | The ID of the auth method created for Nomad tasks. |
 
 [nomad_wid]: https://developer.hashicorp.com/nomad/docs/concepts/workload-identity
+[tf_provider_alias]: https://developer.hashicorp.com/terraform/language/providers/configuration#alias-multiple-provider-configurations
