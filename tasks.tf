@@ -55,7 +55,7 @@ resource "consul_acl_binding_rule" "tasks" {
   bind_type   = "role"
 
   # bind_name must match the name of an ACL role to apply to tokens. You may
-  # refenrece values from the ClaimMappings configured in the auth method to
+  # reference values from the ClaimMappings configured in the auth method to
   # make the selection more dynamic.
   #
   # Refer to Consul's documentation on claim mappings for more information.
