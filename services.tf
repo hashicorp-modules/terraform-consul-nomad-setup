@@ -51,5 +51,5 @@ resource "consul_acl_binding_rule" "services" {
 
   # bind_name matches the pattern used by Nomad to register services in Consul
   # and should not be modified.
-  bind_name = "$${value.nomad_namespace}-$${value.nomad_service}"
+  bind_name = "$${value.nomad_service}"
 }
