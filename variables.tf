@@ -25,7 +25,7 @@ variable "tasks_auth_method_name" {
 variable "tasks_default_policy_name" {
   description = "The name of the default Consul ACL policy created for Nomad tasks when `tasks_policy_ids` is not defined."
   type        = string
-  default     = "nomad-task"
+  default     = "nomad-tasks"
 }
 
 variable "tasks_policy_ids" {

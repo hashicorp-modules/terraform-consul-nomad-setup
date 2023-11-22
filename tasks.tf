@@ -14,7 +14,7 @@ locals {
 
   # tasks_role_prefix ensures that roles and binding rules are created with
   # compatible names. A mismatch can cause login requests to return 403 errors.
-  tasks_role_prefix = "nomad-task"
+  tasks_role_prefix = "nomad-tasks"
 }
 
 # consul_acl_auth_method.tasks is the JWT auth method used by Nomad tasks
@@ -33,7 +33,6 @@ resource "consul_acl_auth_method" "tasks" {
       nomad_namespace = "nomad_namespace"
       nomad_job_id    = "nomad_job_id"
       nomad_task      = "nomad_task"
-      nomad_service   = "nomad_service"
     }
   })
 
