@@ -33,7 +33,6 @@ resource "consul_acl_auth_method" "tasks" {
       nomad_namespace = "nomad_namespace"
       nomad_job_id    = "nomad_job_id"
       nomad_task      = "nomad_task"
-      nomad_service   = "nomad_service"
     }
   })
 
