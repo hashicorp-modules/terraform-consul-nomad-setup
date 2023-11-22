@@ -103,7 +103,7 @@ module "consul_setup" {
 | <a name="input_nomad_namespaces"></a> [nomad\_namespaces](#input\_nomad\_namespaces) | A list of Nomad namespaces where jobs that need access to Consul are deployed. A Consul ACL role is created for each namespace. | `list(string)` | <pre>[<br>  "default"<br>]</pre> | no |
 | <a name="input_services_auth_method_name"></a> [services\_auth\_method\_name](#input\_services\_auth\_method\_name) | The name of the auth method used to register Nomad services. | `string` | `"nomad-services"` | no |
 | <a name="input_tasks_auth_method_name"></a> [tasks\_auth\_method\_name](#input\_tasks\_auth\_method\_name) | The name of the auth method used to access Consul data by Nomad tasks. | `string` | `"nomad-tasks"` | no |
-| <a name="input_tasks_default_policy_name"></a> [tasks\_default\_policy\_name](#input\_tasks\_default\_policy\_name) | The name of the default Consul ACL policy created for Nomad tasks when `tasks_policy_ids` is not defined. | `string` | `"nomad-task"` | no |
+| <a name="input_tasks_default_policy_name"></a> [tasks\_default\_policy\_name](#input\_tasks\_default\_policy\_name) | The name of the default Consul ACL policy created for Nomad tasks when `tasks_policy_ids` is not defined. | `string` | `"nomad-tasks"` | no |
 | <a name="input_tasks_policy_ids"></a> [tasks\_policy\_ids](#input\_tasks\_policy\_ids) | A list of ACL policy IDs to apply to tokens generated for Nomad tasks. | `list(string)` | `[]` | no |
 
 ## Outputs
