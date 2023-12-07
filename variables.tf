@@ -10,16 +10,19 @@ variable "nomad_jwks_url" {
 
 # Optional variables.
 
-variable "services_auth_method_name" {
-  description = "The name of the auth method used to register Nomad services."
+variable "auth_method_name" {
+  description = "The name of the auth method used to exchange Nomad workload identities for Consul ACL tokens."
   type        = string
-  default     = "nomad-services"
+  default     = "nomad-workloads"
 }
 
-variable "tasks_auth_method_name" {
-  description = "The name of the auth method used to access Consul data by Nomad tasks."
-  type        = string
-  default     = "nomad-tasks"
+variable "auth_method_namespace_rules" {
+  description = "List of rules to match a Nomad workload identity to a Consul namespace. Only available with Consul Enterprise"
+  type = list(object({
+    bind_namespace = string
+    selector       = optional(string)
+  }))
+  default = []
 }
 
 variable "tasks_default_policy_name" {

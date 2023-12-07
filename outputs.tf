@@ -1,14 +1,9 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
-output "services_auth_method_id" {
-  description = "The ID of the auth method created for Nomad services."
-  value       = consul_acl_auth_method.services.id
-}
-
-output "tasks_auth_method_id" {
-  description = "The ID of the auth method created for Nomad tasks."
-  value       = consul_acl_auth_method.tasks.id
+output "auth_method_id" {
+  description = "The ID of the auth method created for Nomad workloads."
+  value       = consul_acl_auth_method.nomad.id
 }
 
 output "tasks_acl_role_ids" {
@@ -42,8 +37,8 @@ consul {
   # cert_file = "/etc/ssl/consul.crt"
   # key_file  = "/etc/ssl/consul.key"
 
-  service_auth_method = "${consul_acl_auth_method.services.name}"
-  task_auth_method    = "${consul_acl_auth_method.tasks.name}"
+  service_auth_method = "${consul_acl_auth_method.nomad.name}"
+  task_auth_method    = "${consul_acl_auth_method.nomad.name}"
 }
 EOF
 }
