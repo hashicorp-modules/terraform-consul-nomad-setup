@@ -1,3 +1,11 @@
+## Unreleased
+
+## 2.0.0 (December 7, 2023)
+
+BREAKING CHANGES:
+
+* Use single auth method to simplify the deployment and configuration ([#3](https://github.com/hashicorp-modules/terraform-consul-nomad-setup/pull/3))
+
 ## 1.1.0 (November 21, 2023)
 
 IMPROVEMENTS
